@@ -1,0 +1,42 @@
+<div ng-controller="graphCtrl as graph">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span>Adicionar vizinho</span>
+        </div>
+        <div class="panel-body">
+            <form>
+                <div class="form-group">
+                    <label>Nodo</label>
+                    <select class="form-control" ng-model="graph.model.NodoId">
+                        <option ng-repeat="nodo in graph.nodos" value="{{nodo.Id}}">{{nodo.Name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nodo vizinho</label>
+                    <select class="form-control" ng-model="graph.model.NodoIdNeighbor">
+                        <option ng-repeat="nodo in graph.getNeighborNodos()" value="{{nodo.Id}}">{{nodo.Name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Distancia</label>
+                    <input class="form-control" type="number" ng-model="graph.model.Distance" />
+                </div>
+                <button type="button" class="btn btn-default" ng-click="graph.addNeighbor()">Adicionar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="nodo in graph.nodos">
+            <strong>{{nodo.Name}}</strong>
+            <ul class="list-group" ng-if="nodo.Neighbors.length">
+                <li class="list-group-item" ng-repeat="n in nodo.Neighbors">
+                    {{graph.getNodo(n.Id).Name}} - {{n.Distance}}
+                    <input type="button" class="btn btn-danger btn-xs pull-right" value="X" ng-click="graph.removeNeighbor(nodo.Id, n)" />
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

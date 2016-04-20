@@ -1,0 +1,24 @@
+<div ng-controller="homeCtrl as home">
+    <input class="btn btn-default" type="button" value="Calcular" ng-click="home.calculate()" />
+
+    <div class="panel panel-default" ng-show="home.nodos.length">
+        <div class="panel-body">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="text-center" ng-repeat="h in home.nodos">{{h.Name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="nodo in home.nodos">
+                        <td><strong>{{nodo.Name}}</strong></td>
+                        <td ng-repeat="dist in nodo.Distances" uib-popover="{{home.generatePopover(nodo, dist)}}" popover-append-to-body="true">
+                            {{dist.Value}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
