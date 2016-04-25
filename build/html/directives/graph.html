@@ -1,42 +1,37 @@
 <div ng-controller="graphCtrl as graph">
-    <div class="panel panel-default">
+  <d3-graph
+    nodes="graph.nodes"
+    add-node="graph.addNode(node)"
+    remove-node="graph.removeNode(node)"
+    add-link="graph.addLink(source, target)"
+    remove-link="graph.removeLink(link)"
+    update-select-node="graph.updateSelectNode(node)"
+    update-select-link="graph.updateSelectLink(link)"></d3-graph>
+  <!-- <div id="graph" ng-click="graph.click()"></div> -->
+
+    <div class="panel panel-default" ng-show="graph.exibirInformativo()">
         <div class="panel-heading">
-            <span>Adicionar vizinho</span>
+            <span>Informativo</span>
         </div>
         <div class="panel-body">
-            <form>
-                <div class="form-group">
-                    <label>Nodo</label>
-                    <select class="form-control" ng-model="graph.model.NodoId">
-                        <option ng-repeat="nodo in graph.nodos" value="{{nodo.Id}}">{{nodo.Name}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Nodo vizinho</label>
-                    <select class="form-control" ng-model="graph.model.NodoIdNeighbor">
-                        <option ng-repeat="nodo in graph.getNeighborNodos()" value="{{nodo.Id}}">{{nodo.Name}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Distancia</label>
-                    <input class="form-control" type="number" ng-model="graph.model.Distance" />
-                </div>
-                <button type="button" class="btn btn-default" ng-click="graph.addNeighbor()">Adicionar</button>
-            </form>
+          <dl ng-show="graph.link">
+            <dt>Nodo de origem</dt>
+            <dd>{{graph.link.source.name}}</dd>
+            <dt>Nodo de destino</dt>
+            <dd>{{graph.link.target.name}}</dd>
+            <dt>Sentido duplo</dt>
+            <dd>{{graph.link.left ? "Sim" : "Não"}}</dd>
+            <dt>Peso</dt>
+            <dd>Não implementado =(</dd>
+          </dl>
+
+          <dl ng-show="graph.node">
+            <dt>Nodo Id</dt>
+            <dd>{{graph.node.id}}</dd>
+            <dt>Nodo Nome</dt>
+            <dd>{{graph.node.name}}</dd>
+          </dl>
+
         </div>
     </div>
-
-
-    <ul class="list-group">
-        <li class="list-group-item" ng-repeat="nodo in graph.nodos">
-            <strong>{{nodo.Name}}</strong>
-            <ul class="list-group" ng-if="nodo.Neighbors.length">
-                <li class="list-group-item" ng-repeat="n in nodo.Neighbors">
-                    {{graph.getNodo(n.Id).Name}} - {{n.Distance}}
-                    <input type="button" class="btn btn-danger btn-xs pull-right" value="X" ng-click="graph.removeNeighbor(nodo.Id, n)" />
-                    <div class="clearfix"></div>
-                </li>
-            </ul>
-        </li>
-    </ul>
 </div>

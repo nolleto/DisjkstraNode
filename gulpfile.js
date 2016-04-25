@@ -5,7 +5,9 @@ var gulp = require('gulp')
 	, server = require('gulp-express')
 	, source = require('vinyl-source-stream')
 	, babelify = require('babelify')
-	, concatCss = require('gulp-concat-css');
+	, concatCss = require('gulp-concat-css')
+	, less = require('gulp-less')
+	, path = require('path');
 
 gulp.task('app', function() {
 	gulp.src('./server/**/*.js')
@@ -37,17 +39,24 @@ gulp.task('html', function() {
 gulp.task('css', function() {
 	gulp.src('./node_modules/bootstrap/dist/css/*.css')
 			.pipe(concatCss('css/app.css'))
-			.pipe(gulp.dest('./build'))
+			.pipe(gulp.dest('./build'));
+	gulp.src('./src/css/main.less')
+    .pipe(less({
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(gulp.dest('./build/css'));
 })
 
 gulp.task('server', function () {
-    server.run(['./build/app.js']);
+    //server.run(['./build/app.js']);
+		server.run(['./app.js']);
 });
 
 gulp.task('watch', function() {
 	gulp.watch('src/js/**/*.js', ['scripts']);
 	gulp.watch('src/html/index.html', ['html']);
 	gulp.watch('src/html/directives/**/*.html', ['html']);
+	gulp.watch('./src/css/**/*.less', ['css']);
 });
 
 gulp.task('web', ['html', 'scripts', 'css']);

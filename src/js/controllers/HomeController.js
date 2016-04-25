@@ -9,7 +9,7 @@ export default class HomeController {
 
   calculate() {
     var self = this;
-    var n = this.nodoFact.nodos;
+    var n = this.formatNodo();
 
     this.$http.post('/Execute', { nodos: n }, {}).then(function successCallback(response) {
         self.nodos = response.data;
@@ -17,6 +17,10 @@ export default class HomeController {
     }, function errorCallback(response) {
         console.log('error', response);
     });
+  }
+
+  formatNodo() {
+    return [];
   }
 
   generatePopover(nodo, distance) {

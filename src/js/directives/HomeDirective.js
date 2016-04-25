@@ -1,9 +1,11 @@
 export default class HomeDirective {
-  restrict = 'E';
-  templateUrl = '/html/home.html'
+  constructor() {
+    this.restrict = 'E';
+    this.templateUrl = '/html/directives/home.html';
+  }
 
   static instance() {
-      return new Info();
+      return new HomeDirective();
   }
 
   link(scope, elements, attrs) {

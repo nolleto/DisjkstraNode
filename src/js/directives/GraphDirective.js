@@ -1,9 +1,11 @@
 export default class GraphDirective {
-  restrict = 'E';
-  templateUrl = '/html/graph.html'
+  constructor() {
+    this.restrict = 'E';
+    this.templateUrl = '/html/directives/graph.html';
+  }
 
   static instance() {
-      return new Info();
+      return new GraphDirective();
   }
 
   link(scope, elements, attrs) {

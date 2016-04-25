@@ -2,15 +2,15 @@ import Neighbor from './Neighbor'
 
 class Nodo {
   constructor(id, name) {
-    this.Id = id,
-    this.Name = name,
-    this.Distances = [];
-    this.Neighbors = [];
+    this.id = id,
+    this.name = name,
+    this.distances = [];
+    this.neighbors = [];
   }
 
   addNeighbor(id, distance) {
     var temp = new Neighbor(id, distance);
-    this.Neighbors.push(temp);
+    this.neighbors.push(temp);
   }
 }
 

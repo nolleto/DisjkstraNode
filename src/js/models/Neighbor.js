@@ -1,7 +1,7 @@
 class Neighbor {
   constructor(id, distance) {
-    this.Id = id;
-    this.Distance = distance;
+    this.id = id;
+    this.distance = distance;
   }
 }
 

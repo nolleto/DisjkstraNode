@@ -1,8 +1,8 @@
 class Distance {
   constructor() {
-    this.IdTarget = '';
-    this.Value = undefined;
-    this.Traveleds = [];
+    this.idTarget = '';
+    this.value = undefined;
+    this.traveleds = [];
   }
 }
 

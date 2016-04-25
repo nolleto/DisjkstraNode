@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 var Disjkstra = require('./server/Disjkstra');
 
 // view engine setup
-app.set('views', path.join(__dirname, './'));
+app.set('views', path.join(__dirname, './build/'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
@@ -17,7 +17,7 @@ app.use(bodyParser.json({ limit: '10mb' })); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.get('/', function (req, res) {
-  res.render('/html/index', { title: 'Express' });
+  res.render('html/index', { title: 'Express' });
 });
 
 app.post('/Execute', function(req, res) {
